@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Electrónico</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Terminal View -->
+        <div id="terminal-view">
+            <div class="header">
+                <div class="header-title">
+                    <span class="terminal-icon">⚡</span>
+                    <h1>Portafolio Electrónico</h1>
+                </div>
+                <p>Sistema interactivo de navegación tipo Linux para documentar el aprendizaje</p>
+            </div>
+
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-button btn-red"></div>
+                    <div class="terminal-button btn-yellow"></div>
+                    <div class="terminal-button btn-green"></div>
+                    <span class="terminal-title">Terminal - <span id="current-path">/</span></span>
+                </div>
+
+                <div class="terminal-body" id="terminal-body">
+                    <div class="welcome-message">
+                        <div>Bienvenido al Portafolio Electrónico</div>
+                        <div>Escribe 'help' para ver los comandos disponibles</div>
+                        <div>Usa 'tree' para ver la estructura completa</div>
+                    </div>
+
+                    <div id="terminal-history"></div>
+
+                    <div class="terminal-input-container">
+                        <span class="terminal-prompt" id="terminal-prompt">/$</span>
+                        <input type="text" class="terminal-input" id="terminal-input" placeholder="Escribe un comando..." autofocus>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-nav">
+                <h3>Navegación Rápida:</h3>
+                <div class="nav-buttons" id="nav-buttons"></div>
+            </div>
+        </div>
+
+        <!-- File Content View -->
+        <div id="file-view" class="hidden">
+            <div class="file-content" id="file-content"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
