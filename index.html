@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portafolio Electrónico</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="dark-bg">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">A</div>
+        <div class="username">Alex Samaniego</div>
+        <div class="role">Web Developer</div>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <button class="nav-btn" data-section="portada">Portada</button>
+          </li>
+          <li>
+            <button class="nav-btn" data-section="sobre-mi">Sobre Mí</button>
+          </li>
+          <li>
+            <button class="nav-btn" data-section="proyectos">Proyectos</button>
+          </li>
+          <li>
+            <button class="nav-btn" data-section="cuaderno">Cuaderno</button>
+          </li>
+          <li>
+            <button class="nav-btn" data-section="reflexion-final">
+              Reflexión Final
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-section="bibliografia">
+              Bibliografía
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="https://github.com/AlexSam-stack" target="_blank">GitHub</a>
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      </div>
+      <button id="toggle-terminal" class="terminal-toggle-btn">
+        Abrir Terminal
+      </button>
+    </div>
+
+    <main class="main-content">
+      <section id="main-section">
+        <!-- Aquí se carga el contenido dinámico -->
+        <h1>¡Bienvenido a mi Portafolio!</h1>
+        <p>Selecciona una sección en la barra lateral.</p>
+      </section>
+    </main>
+
+    <aside id="terminal-panel" class="terminal-panel hidden">
+      <div class="terminal-header">
+        <span>Terminal</span>
+        <button id="close-terminal" title="Cerrar Terminal">&times;</button>
+      </div>
+      <div class="terminal-body">
+        <!-- Aquí va tu terminal original -->
+        <div class="welcome-message">
+          <div>Bienvenido al Portafolio Electrónico</div>
+          <div>Escribe 'help' para ver los comandos disponibles</div>
+          <div>Usa 'tree' para ver la estructura completa</div>
+        </div>
+        <div id="terminal-history"></div>
+        <div class="terminal-input-container">
+          <span class="terminal-prompt">/$</span>
+          <input
+            type="text"
+            class="terminal-input"
+            id="terminal-input"
+            placeholder="Escribe un comando..."
+          />
+        </div>
+      </div>
+    </aside>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semana 4: JavaScript y TypeScript</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        background: linear-gradient(45deg, #64ffda, #1de9b6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .section {
+        margin-bottom: 40px;
+        padding: 25px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        border-left: 4px solid #64ffda;
+      }
+
+      .section h2 {
+        color: #64ffda;
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section h3 {
+        color: #1de9b6;
+        font-size: 1.3em;
+        margin: 20px 0 15px 0;
+      }
+
+      .topics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .topic-card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid rgba(100, 255, 218, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .topic-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(100, 255, 218, 0.2);
+      }
+
+      .topic-card h4 {
+        color: #64ffda;
+        margin-bottom: 10px;
+        font-size: 1.1em;
+      }
+
+      .topic-card p {
+        line-height: 1.6;
+        color: #b0bec5;
+      }
+
+      .exercise-section {
+        background: linear-gradient(
+          45deg,
+          rgba(100, 255, 218, 0.1),
+          rgba(29, 233, 182, 0.1)
+        );
+        border-left: 4px solid #1de9b6;
+      }
+
+      .canvas-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      #animationCanvas {
+        border: 2px solid #64ffda;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.3);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .controls {
+        margin-top: 20px;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: linear-gradient(45deg, #64ffda, #1de9b6);
+        color: #1e3c72;
+        font-weight: bold;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+      }
+
+      .code-example {
+        background: rgba(0, 0, 0, 0.4);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        border: 1px solid rgba(100, 255, 218, 0.3);
+        overflow-x: auto;
+      }
+
+      .code-example pre {
+        color: #64ffda;
+        font-family: "Courier New", monospace;
+        line-height: 1.6;
+      }
+
+      .highlight {
+        background: rgba(100, 255, 218, 0.2);
+        padding: 2px 4px;
+        border-radius: 3px;
+      }
+
+      .status {
+        text-align: center;
+        margin: 10px 0;
+        padding: 10px;
+        background: rgba(100, 255, 218, 0.1);
+        border-radius: 8px;
+        font-weight: bold;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 2em;
+        }
+
+        .topics-grid {
+          grid-template-columns: 1fr;
+        }
+
+        #animationCanvas {
+          width: 100%;
+          height: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📚 Semana 4: Desarrollo Front-End con JavaScript y TypeScript</h1>
+
+      <div class="section">
+        <h2>🎯 Conceptos Fundamentales</h2>
+        <div class="topics-grid">
+          <div class="topic-card">
+            <h4>🔧 Fundamentos de JavaScript y TypeScript</h4>
+            <p>
+              Motores de JavaScript, variables (var, let, const), operadores
+              aritméticos, lógicos y de comparación, y manejo de tipos de datos
+              primitivos y complejos.
+            </p>
+          </div>
+          <div class="topic-card">
+            <h4>🔄 Estructuras de Control</h4>
+            <p>
+              Condicionales (if, else, switch), bucles (for, while, do-while,
+              for...in, for...of) y control de flujo en aplicaciones JavaScript.
+            </p>
+          </div>
+          <div class="topic-card">
+            <h4>⚡ Funciones en JavaScript</h4>
+            <p>
+              Sintaxis de funciones, invocación, tipos: anónimas, flecha,
+              auto-invocadas, closures y manejo del contexto (this).
+            </p>
+          </div>
+          <div class="topic-card">
+            <h4>🎨 Manipulación del DOM</h4>
+            <p>
+              Métodos y propiedades del DOM, selección de elementos,
+              modificación de contenido y atributos, manejo de eventos.
+            </p>
+          </div>
+          <div class="topic-card">
+            <h4>✨ Estilización con JavaScript</h4>
+            <p>
+              Modificación de estilos CSS desde JavaScript, clases dinámicas,
+              transiciones y efectos visuales programáticos.
+            </p>
+          </div>
+          <div class="topic-card">
+            <h4>🎭 Canvas y Animaciones</h4>
+            <p>
+              Creación de gráficos vectoriales, animaciones fluidas,
+              manipulación de píxeles y desarrollo de elementos interactivos.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>💻 Ejemplos de Código</h2>
+
+        <h3>🏷️ Variables y Tipos de Datos</h3>
+        <div class="code-example">
+          <pre>
+// Variables y tipos de datos
+let nombre: string = "JavaScript";
+const version: number = 2025;
+var activo: boolean = true;
+
+// Función flecha con TypeScript
+const saludar = (usuario: string): string => {
+    return `¡Hola, ${usuario}!`;
+};
+
+// Closure example
+function contador() {
+    let cuenta = 0;
+    return function() {
+        return ++cuenta;
+    };
+}
+                </pre
+          >
+        </div>
+
+        <h3>🎯 Manipulación del DOM</h3>
+        <div class="code-example">
+          <pre>
+// Selección y manipulación de elementos
+const elemento = document.getElementById('miElemento');
+elemento.style.backgroundColor = '#64ffda';
+elemento.classList.add('animacion');
+
+// Event listeners
+documento.addEventListener('click', function(e) {
+    console.log('Clic en:', e.target);
+});
+                </pre
+          >
+        </div>
+      </div>
+
+      <div class="section exercise-section">
+        <h2>🎮 Ejercicio Práctico: Animación con Canvas</h2>
+        <p>
+          Desarrolla una animación sencilla utilizando JavaScript y el elemento
+          Canvas. Esta implementación incluye partículas animadas,
+          interactividad y efectos visuales.
+        </p>
+
+        <div class="canvas-container">
+          <canvas id="animationCanvas" width="800" height="400"></canvas>
+          <div class="status" id="status">
+            🎨 Animación cargada - Haz clic para interactuar
+          </div>
+          <div class="controls">
+            <button class="btn" onclick="toggleAnimation()">
+              ⏯️ Pausar/Reanudar
+            </button>
+            <button class="btn" onclick="addParticles()">
+              ➕ Agregar Partículas
+            </button>
+            <button class="btn" onclick="changeColors()">
+              🎨 Cambiar Colores
+            </button>
+            <button class="btn" onclick="resetAnimation()">🔄 Reiniciar</button>
+          </div>
+        </div>
+
+        <h3>📋 Características Implementadas</h3>
+        <div class="topics-grid">
+          <div class="topic-card">
+            <h4>✅ Partículas Animadas</h4>
+            <p>
+              Sistema de partículas con movimiento físico, colisiones y efectos
+              visuales dinámicos.
+            </p>
+          </div>
+          <div class="topic-card">
+            <h4>✅ Interactividad</h4>
+            <p>
+              Respuesta a eventos del mouse, teclado y controles de la interfaz
+              para una experiencia inmersiva.
+            </p>
+          </div>
+          <div class="topic-card">
+            <h4>✅ Animaciones Fluidas</h4>
+            <p>
+              Uso de requestAnimationFrame para animaciones suaves y optimizadas
+              a 60 FPS.
+            </p>
+          </div>
+          <div class="topic-card">
+            <h4>✅ Efectos Visuales</h4>
+            <p>
+              Gradientes, sombras, transparencias y efectos de desvanecimiento
+              para mejorar la estética.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>🏆 Resultados de Aprendizaje</h2>
+        <p>
+          Al completar esta semana, has desarrollado habilidades fundamentales
+          en:
+        </p>
+        <ul style="margin-top: 15px; padding-left: 20px; line-height: 1.8">
+          <li>
+            ✅
+            <span class="highlight">Programación JavaScript avanzada</span> con
+            manejo de tipos y estructuras de datos
+          </li>
+          <li>
+            ✅
+            <span class="highlight">Manipulación eficiente del DOM</span> para
+            crear interfaces dinámicas
+          </li>
+          <li>
+            ✅
+            <span class="highlight">Desarrollo de animaciones</span> utilizando
+            Canvas API
+          </li>
+          <li>
+            ✅
+            <span class="highlight">Implementación de interactividad</span> con
+            eventos y controles de usuario
+          </li>
+          <li>
+            ✅ <span class="highlight">Optimización de rendimiento</span> en
+            aplicaciones web front-end
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      // Variables globales para la animación
+      let canvas, ctx;
+      let particles = [];
+      let animationId;
+      let isAnimating = true;
+      let mouseX = 0,
+        mouseY = 0;
+      let colorScheme = 0;
+
+      // Esquemas de colores
+      const colorSchemes = [
+        ["#64ffda", "#1de9b6", "#00bcd4", "#26a69a"],
+        ["#ff6b6b", "#ff8e53", "#ff6b9d", "#c44569"],
+        ["#4ecdc4", "#45b7d1", "#96ceb4", "#ffeaa7"],
+        ["#a8edea", "#fed6e3", "#ffecd2", "#fcb69f"],
+      ];
+
+      // Clase Particle para las partículas animadas
+      class Particle {
+        constructor(x, y) {
+          this.x = x || Math.random() * canvas.width;
+          this.y = y || Math.random() * canvas.height;
+          this.vx = (Math.random() - 0.5) * 4;
+          this.vy = (Math.random() - 0.5) * 4;
+          this.radius = Math.random() * 8 + 2;
+          this.color =
+            colorSchemes[colorScheme][
+              Math.floor(Math.random() * colorSchemes[colorScheme].length)
+            ];
+          this.alpha = 1;
+          this.decay = Math.random() * 0.02 + 0.005;
+          this.life = 1;
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+
+          // Rebote en los bordes
+          if (this.x < this.radius || this.x > canvas.width - this.radius) {
+            this.vx *= -0.8;
+            this.x = Math.max(
+              this.radius,
+              Math.min(canvas.width - this.radius, this.x)
+            );
+          }
+          if (this.y < this.radius || this.y > canvas.height - this.radius) {
+            this.vy *= -0.8;
+            this.y = Math.max(
+              this.radius,
+              Math.min(canvas.height - this.radius, this.y)
+            );
+          }
+
+          // Atracción hacia el mouse
+          const dx = mouseX - this.x;
+          const dy = mouseY - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 100) {
+            const force = (100 - distance) / 100;
+            this.vx += dx * force * 0.01;
+            this.vy += dy * force * 0.01;
+          }
+
+          // Fricción
+          this.vx *= 0.99;
+          this.vy *= 0.99;
+
+          // Ciclo de vida
+          this.life -= this.decay;
+          this.alpha = this.life;
+        }
+
+        draw() {
+          ctx.save();
+          ctx.globalAlpha = this.alpha;
+
+          // Gradiente radial
+          const gradient = ctx.createRadialGradient(
+            this.x,
+            this.y,
+            0,
+            this.x,
+            this.y,
+            this.radius
+          );
+          gradient.addColorStop(0, this.color);
+          gradient.addColorStop(1, this.color + "00");
+
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Borde brillante
+          ctx.strokeStyle = this.color;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          ctx.restore();
+        }
+
+        isDead() {
+          return this.life <= 0;
+        }
+      }
+
+      // Inicialización
+      function init() {
+        canvas = document.getElementById("animationCanvas");
+        ctx = canvas.getContext("2d");
+
+        // Crear partículas iniciales
+        for (let i = 0; i < 30; i++) {
+          particles.push(new Particle());
+        }
+
+        // Event listeners
+        canvas.addEventListener("mousemove", (e) => {
+          const rect = canvas.getBoundingClientRect();
+          mouseX = e.clientX - rect.left;
+          mouseY = e.clientY - rect.top;
+        });
+
+        canvas.addEventListener("click", (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          // Crear explosión de partículas
+          for (let i = 0; i < 10; i++) {
+            particles.push(new Particle(x, y));
+          }
+        });
+
+        // Iniciar animación
+        animate();
+      }
+
+      // Función de animación principal
+      function animate() {
+        if (!isAnimating) return;
+
+        // Limpiar canvas con efecto de desvanecimiento
+        ctx.fillStyle = "rgba(30, 60, 114, 0.1)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Actualizar y dibujar partículas
+        for (let i = particles.length - 1; i >= 0; i--) {
+          particles[i].update();
+          particles[i].draw();
+
+          // Eliminar partículas muertas
+          if (particles[i].isDead()) {
+            particles.splice(i, 1);
+          }
+        }
+
+        // Agregar nuevas partículas ocasionalmente
+        if (Math.random() < 0.05 && particles.length < 100) {
+          particles.push(new Particle());
+        }
+
+        // Conectar partículas cercanas
+        drawConnections();
+
+        // Actualizar estado
+        document.getElementById(
+          "status"
+        ).textContent = `🎨 Partículas activas: ${particles.length}`;
+
+        animationId = requestAnimationFrame(animate);
+      }
+
+      // Dibujar conexiones entre partículas
+      function drawConnections() {
+        ctx.strokeStyle = colorSchemes[colorScheme][0] + "30";
+        ctx.lineWidth = 1;
+
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 80) {
+              const opacity = (80 - distance) / 80;
+              ctx.globalAlpha = opacity * 0.3;
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      // Funciones de control
+      function toggleAnimation() {
+        isAnimating = !isAnimating;
+        if (isAnimating) {
+          animate();
+          document.getElementById("status").textContent =
+            "▶️ Animación reanudada";
+        } else {
+          cancelAnimationFrame(animationId);
+          document.getElementById("status").textContent =
+            "⏸️ Animación pausada";
+        }
+      }
+
+      function addParticles() {
+        for (let i = 0; i < 15; i++) {
+          particles.push(new Particle());
+        }
+        document.getElementById("status").textContent =
+          "➕ Partículas agregadas";
+      }
+
+      function changeColors() {
+        colorScheme = (colorScheme + 1) % colorSchemes.length;
+        particles.forEach((particle) => {
+          particle.color =
+            colorSchemes[colorScheme][
+              Math.floor(Math.random() * colorSchemes[colorScheme].length)
+            ];
+        });
+        document.getElementById("status").textContent =
+          "🎨 Esquema de colores cambiado";
+      }
+
+      function resetAnimation() {
+        particles = [];
+        for (let i = 0; i < 30; i++) {
+          particles.push(new Particle());
+        }
+        document.getElementById("status").textContent =
+          "🔄 Animación reiniciada";
+      }
+
+      // Inicializar cuando se carga la página
+      window.addEventListener("load", init);
+    </script>
+  </body>
+</html>

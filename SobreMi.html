@@ -1,0 +1,234 @@
+<div class="sobre-mi-box">
+  <div class="foto-perfil">
+    <img src="../fotos/alex.jpg" alt="Foto de Alex Samaniego" />
+  </div>
+  <div class="info-personal">
+    <div class="nombre-sobre-mi">Alex Piero Samaniego Inga</div>
+    <div class="trayectoria">
+      Estudiante del <b>9no semestre de Ingeniería de Sistemas</b> en la
+      <b>Universidad Nacional del Centro del Perú</b>. Apasionado por la
+      <span class="destacado">ciberseguridad</span>, el
+      <span class="destacado">desarrollo de software</span> y la
+      <span class="destacado">ciencia de datos</span>.
+    </div>
+    <div class="habilidades">
+      <b>Habilidades:</b>
+      <ul>
+        <li>Python (Django, Flask, Pandas, NumPy), Java, JavaScript (React)</li>
+        <li>Ciberseguridad: redes, criptografía, pentesting básico</li>
+        <li>Bases de datos: MySQL, PostgreSQL, MongoDB</li>
+        <li>Desarrollo web: HTML, CSS, APIs RESTful</li>
+        <li>Ciencia de datos: análisis y visualización con Python</li>
+        <li>Control de versiones: Git, GitHub</li>
+      </ul>
+    </div>
+    <div class="experiencia">
+      <b>Experiencia:</b> Participación en proyectos grupales y hackathons,
+      destacando el desarrollo de un sistema de autenticación multifactor
+      ("SecureLink") con Python y Flask. Fuerte capacidad de trabajo en equipo,
+      liderazgo y comunicación.
+    </div>
+  </div>
+</div>
+<style>
+  .sobre-mi-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+    border-radius: 24px;
+    padding: 32px 28px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(76, 175, 80, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    animation: fadeIn 1.2s;
+    max-width: 800px;
+    margin: 32px auto;
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+  }
+
+  .sobre-mi-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #4caf50 0%, #2196f3 50%, #4caf50 100%);
+    animation: shimmer 3s infinite;
+  }
+
+  .sobre-mi-box::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #4caf50, #2196f3, #4caf50);
+    z-index: -1;
+    border-radius: 26px;
+    opacity: 0.3;
+    animation: borderGlow 4s ease-in-out infinite;
+  }
+
+  .foto-perfil {
+    flex-shrink: 0;
+  }
+
+  .foto-perfil img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #4caf50;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3),
+      0 0 0 1px rgba(76, 175, 80, 0.2);
+    transition: all 0.3s ease;
+    animation: profileGlow 4s ease-in-out infinite;
+  }
+
+  .foto-perfil img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4),
+      0 0 0 2px rgba(76, 175, 80, 0.3);
+  }
+
+  .info-personal {
+    flex: 1;
+    color: #e0e0e0;
+  }
+
+  .nombre-sobre-mi {
+    font-size: 1.5em;
+    font-weight: bold;
+    background: linear-gradient(135deg, #4caf50 0%, #2196f3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+    animation: gradientShift 3s ease-in-out infinite;
+  }
+
+  .trayectoria,
+  .habilidades,
+  .experiencia {
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .trayectoria b,
+  .habilidades b,
+  .experiencia b {
+    color: #ffffff;
+  }
+
+  .destacado {
+    background: linear-gradient(135deg, #4caf50 0%, #81c784 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+  }
+
+  ul {
+    margin: 8px 0 0 18px;
+    padding: 0;
+    color: #d0d0d0;
+  }
+
+  ul li {
+    margin-bottom: 6px;
+    position: relative;
+    padding-left: 8px;
+  }
+
+  ul li::before {
+    content: "▸";
+    position: absolute;
+    left: -12px;
+    color: #4caf50;
+    font-weight: bold;
+  }
+
+  /* Animaciones */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes borderGlow {
+    0%,
+    100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes gradientShift {
+    0%,
+    100% {
+      background: linear-gradient(135deg, #4caf50 0%, #2196f3 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    50% {
+      background: linear-gradient(135deg, #2196f3 0%, #4caf50 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+  }
+
+  @keyframes profileGlow {
+    0%,
+    100% {
+      box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3),
+        0 0 0 1px rgba(76, 175, 80, 0.2);
+    }
+    50% {
+      box-shadow: 0 12px 30px rgba(76, 175, 80, 0.4),
+        0 0 0 2px rgba(76, 175, 80, 0.3);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .sobre-mi-box {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 24px 20px;
+    }
+
+    .foto-perfil img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .nombre-sobre-mi {
+      font-size: 1.3em;
+    }
+
+    ul {
+      text-align: left;
+    }
+  }
+</style>
