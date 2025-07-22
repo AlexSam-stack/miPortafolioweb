@@ -6,7 +6,7 @@ const sections = {
   },
   "sobre-mi": {
     title: "Sobre Mí",
-    content: `./sobre_mi/SobreMi.html`, // Archivo externo
+    content: `./sobre_Mi/SobreMi.html`, // Archivo externo
   },
   proyectos: {
     title: "Proyectos",
