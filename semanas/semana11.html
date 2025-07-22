@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semana 11: Autenticación con JWT</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: linear-gradient(135deg, #2c0d0d 0%, #1a0000 100%);
+        min-height: 100vh;
+        padding: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q25,75 50,50 T100,50 V100 H0 Z' fill='rgba(139, 0, 0, 0.2)'/%3E%3C/svg%3E");
+        background-size: 200px 100px;
+        background-position: bottom;
+        color: #ffe4e1;
+      }
+      .container {
+        max-width: 800px;
+        background: rgba(44, 13, 13, 0.9);
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 0 20px rgba(139, 0, 0, 0.5),
+          inset 0 0 10px rgba(139, 0, 0, 0.3);
+      }
+      h1 {
+        color: #ff4040;
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 2.2em;
+        text-shadow: 0 0 10px #ff4040, 0 0 20px #ff4040, 0 0 30px #cc0000;
+      }
+      h2 {
+        color: #ff4040;
+        margin-top: 25px;
+        font-size: 1.8em;
+        text-shadow: 0 0 5px #ff4040, 0 0 10px #cc0000;
+        border-left: 4px solid #ff4040;
+        padding-left: 10px;
+      }
+      h3 {
+        color: #ff4040;
+        font-size: 1.4em;
+        margin: 20px 0 10px;
+        text-shadow: 0 0 5px #ff4040;
+      }
+      .section {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ff4040;
+        border-radius: 5px;
+        box-shadow: 0 0 15px rgba(255, 64, 64, 0.3);
+      }
+      .topic-list {
+        list-style: none;
+        padding-left: 0;
+      }
+      .topic-list li {
+        padding: 10px;
+        border-bottom: 1px solid rgba(255, 64, 64, 0.2);
+        color: #ffe4e1;
+      }
+      .topic-list li strong {
+        color: #ff4040;
+      }
+      .code-example {
+        background: rgba(27, 0, 0, 0.8);
+        border: 1px solid #cc0000;
+        border-radius: 5px;
+        padding: 15px;
+        margin: 15px 0;
+        box-shadow: 0 0 10px rgba(204, 0, 0, 0.2);
+      }
+      .code-example pre {
+        margin: 0;
+        color: #ff4500;
+        font-family: "Courier New", monospace;
+      }
+      .demo-container {
+        background: rgba(15, 0, 0, 0.9);
+        padding: 20px;
+        border-radius: 5px;
+        border: 2px solid #ff4040;
+        box-shadow: 0 0 20px rgba(255, 64, 64, 0.4);
+        margin-top: 20px;
+      }
+      .status {
+        text-align: center;
+        padding: 10px;
+        background: rgba(27, 0, 0, 0.8);
+        border-radius: 5px;
+        margin-top: 10px;
+        color: #ffe4e1;
+        border: 1px solid #cc0000;
+        box-shadow: 0 0 10px rgba(204, 0, 0, 0.2);
+      }
+      .btn-primary {
+        background-color: #ff4040;
+        border-color: #cc0000;
+        color: #1a0000;
+        font-weight: bold;
+        text-shadow: 0 0 5px #ffffff;
+      }
+      .btn-primary:hover {
+        background-color: #cc0000;
+        border-color: #990000;
+        box-shadow: 0 0 15px #ff4040;
+      }
+      .practical-title {
+        color: #dc143c;
+        font-size: 1.8em;
+        text-align: center;
+        margin: 20px 0;
+        text-shadow: 0 0 15px #dc143c, 0 0 30px #b22222, 0 0 40px #8b0000;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+        }
+        h1 {
+          font-size: 1.8em;
+        }
+        h2 {
+          font-size: 1.5em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Semana 11: Autenticación con JWT</h1>
+
+      <div class="section">
+        <h2>Temas Trabajados</h2>
+        <ul class="topic-list">
+          <li>
+            <strong>Introducción a JWT:</strong> Concepto y estructura de JSON
+            Web Tokens.
+          </li>
+          <li>
+            <strong>Autenticación con Spring:</strong> Implementación de JWT en
+            Spring Security.
+          </li>
+          <li>
+            <strong>Generación y Validación:</strong> Creación y verificación de
+            tokens en backend.
+          </li>
+          <li>
+            <strong>Integración con JSP Jakarta:</strong> Uso de JWT en
+            aplicaciones web con Jakarta EE.
+          </li>
+          <li>
+            <strong>Seguridad Avanzada:</strong> Protección de endpoints y
+            manejo de roles.
+          </li>
+          <li>
+            <strong>Almacenamiento:</strong> Gestión de tokens en cookies o
+            headers HTTP.
+          </li>
+          <li>
+            <strong>Pruebas:</strong> Validación de autenticación con Postman o
+            herramientas similares.
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Ejemplos de Código</h2>
+        <h3>Spring Boot - Generación de JWT</h3>
+        <div class="code-example">
+          <pre>
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+@Service
+public class JwtUtil {
+    private String secret = "your-256-bit-secret";
+    public String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
+    }
+}
+                </pre
+          >
+        </div>
+        <h3>JSP Jakarta - Verificación de Token</h3>
+        <div class="code-example">
+          <pre>
+<%@ page language="java" contentType="text/html" %>
+<html>
+<body>
+<h2>Área Segura</h2>
+<%
+    String token = request.getHeader("Authorization");
+    if (token != null && token.startsWith("Bearer ")) {
+        out.println("Usuario autenticado: " + token);
+    } else {
+        out.println("No autenticado");
+    }
+%>
+</body>
+</html>
+                </pre>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="practical-title">Ejercicio Práctico:</h2>
+        <p>
+          Desarrollo y configuración de una aplicación backend con autenticación
+          JWT usando Spring Boot y JSP Jakarta.
+        </p>
+        <div class="demo-container">
+          <h3>Configuración del Proyecto</h3>
+          <p>
+            Configura Spring Boot con JWT para autenticación y una vista JSP
+            para verificar tokens.
+          </p>
+          <div class="status" id="appStatus">Proyecto no configurado</div>
+          <div class="d-flex gap-2 justify-content-center mb-3">
+            <button
+              class="btn btn-primary"
+              onclick="updateStatus('Spring Boot con JWT iniciado')"
+            >
+              Iniciar Spring
+            </button>
+            <button
+              class="btn btn-primary"
+              onclick="updateStatus('Token generado')"
+            >
+              Generar Token
+            </button>
+            <button
+              class="btn btn-primary"
+              onclick="updateStatus('JSP con autenticación desplegada')"
+            >
+              Desplegar JSP
+            </button>
+          </div>
+        </div>
+        <h3>Resultados Obtenidos</h3>
+        <ul class="topic-list">
+          <li>✅ Configuración de Spring Security con JWT.</li>
+          <li>✅ Generación y validación exitosa de tokens.</li>
+          <li>✅ Integración con JSP Jakarta para autenticación.</li>
+          <li>✅ Despliegue funcional en entorno local.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Reflexión</h2>
+        <h3>¿Qué aprendí?</h3>
+        <p>
+          Aprendí a implementar autenticación segura con JWT en Spring y a
+          integrarla con JSP Jakarta. Entendí la importancia de los tokens para
+          la seguridad en aplicaciones web.
+        </p>
+        <h3>¿Cómo aprendí?</h3>
+        <p>
+          Estudié la documentación de Spring Security y JWT, y practiqué
+          configurando un proyecto con autenticación. El ejercicio práctico me
+          permitió aplicar estos conceptos en un entorno real.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      function updateStatus(message) {
+        const status = document.getElementById("appStatus");
+        status.textContent = message;
+        setTimeout(() => {
+          status.textContent = "Proyecto no configurado";
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>

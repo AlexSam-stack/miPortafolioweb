@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semana 15: Sistemas Web Inteligentes</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+        color: #ffffff;
+        min-height: 100vh;
+        padding: 20px;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 40px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.3)" opacity="0"><animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite" begin="0s"/></circle><circle cx="80" cy="30" r="2" fill="rgba(255,255,255,0.3)" opacity="0"><animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite" begin="1s"/></circle><circle cx="40" cy="70" r="2" fill="rgba(255,255,255,0.3)" opacity="0"><animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite" begin="2s"/></circle></svg>')
+          repeat;
+      }
+
+      .header h1 {
+        font-size: 2.8rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 1;
+      }
+
+      .header .subtitle {
+        font-size: 1.3rem;
+        opacity: 0.9;
+        position: relative;
+        z-index: 1;
+      }
+
+      .content {
+        padding: 40px;
+      }
+
+      .section {
+        margin-bottom: 40px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+        color: #00d4ff;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .icon {
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+      }
+
+      .definition-box {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-left: 4px solid #00d4ff;
+      }
+
+      .procedure-steps {
+        counter-reset: step-counter;
+      }
+
+      .step {
+        counter-increment: step-counter;
+        position: relative;
+        padding-left: 50px;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .step::before {
+        content: counter(step-counter);
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+        color: #000;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+
+      .lab-result {
+        background: linear-gradient(135deg, #11998e, #38ef7d);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 15px;
+        color: #000;
+      }
+
+      .reflection-card {
+        background: linear-gradient(135deg, #fc466b, #3f5efb);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+      }
+
+      .highlight {
+        background: rgba(255, 215, 61, 0.2);
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #ffd93d;
+        font-weight: bold;
+      }
+
+      .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .tech-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .tech-card:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+      }
+
+      .pulse {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .content {
+          padding: 20px;
+        }
+
+        .tech-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🌐 Semana 15: Sistemas Web Inteligentes</h1>
+        <p class="subtitle">
+          Integrando Inteligencia Artificial en el Desarrollo Web
+        </p>
+      </div>
+
+      <div class="content">
+        <!-- Temas Aprendidos -->
+        <div class="section">
+          <h2 class="section-title">
+            <div class="icon">🧠</div>
+            Temas Aprendidos
+          </h2>
+
+          <div class="definition-box">
+            <h3>¿Qué son los Sistemas Web Inteligentes?</h3>
+            <p>
+              Los sistemas web inteligentes son aplicaciones web que incorporan
+              <span class="highlight">inteligencia artificial</span> y
+              <span class="highlight">aprendizaje automático</span> para
+              proporcionar experiencias personalizadas, adaptativas y
+              automatizadas. Estos sistemas pueden aprender de los datos del
+              usuario, predecir comportamientos, y tomar decisiones autónomas
+              para mejorar la experiencia del usuario.
+            </p>
+          </div>
+
+          <div class="tech-grid">
+            <div class="tech-card">
+              <h4>🤖 Machine Learning Web</h4>
+              <p>
+                Implementación de algoritmos de ML directamente en navegadores
+                usando TensorFlow.js y WebGL
+              </p>
+            </div>
+            <div class="tech-card">
+              <h4>🎯 Sistemas de Recomendación</h4>
+              <p>
+                Algoritmos que analizan preferencias del usuario para sugerir
+                contenido personalizado
+              </p>
+            </div>
+            <div class="tech-card">
+              <h4>💬 Chatbots Inteligentes</h4>
+              <p>
+                Asistentes conversacionales que utilizan NLP para interacciones
+                naturales
+              </p>
+            </div>
+            <div class="tech-card">
+              <h4>📊 Analytics Predictivos</h4>
+              <p>
+                Análisis de datos en tiempo real para predecir tendencias y
+                comportamientos
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Procedimiento -->
+        <div class="section">
+          <h2 class="section-title">
+            <div class="icon">⚙️</div>
+            Procedimiento de Implementación
+          </h2>
+
+          <div class="procedure-steps">
+            <div class="step">
+              <h4>Análisis de Requisitos Inteligentes</h4>
+              <p>
+                Identificar qué aspectos del sistema web pueden beneficiarse de
+                IA: personalización, automatización, predicción o optimización
+                de contenido.
+              </p>
+            </div>
+
+            <div class="step">
+              <h4>Selección de Tecnologías</h4>
+              <p>
+                Elegir frameworks apropiados como TensorFlow.js para ML
+                client-side, APIs de OpenAI para NLP, o bibliotecas como
+                Brain.js para redes neuronales simples.
+              </p>
+            </div>
+
+            <div class="step">
+              <h4>Recolección y Preparación de Datos</h4>
+              <p>
+                Implementar sistemas de tracking ético, limpiar datos, y crear
+                datasets de entrenamiento respetando la privacidad del usuario.
+              </p>
+            </div>
+
+            <div class="step">
+              <h4>Desarrollo de Modelos</h4>
+              <p>
+                Entrenar modelos de ML, implementar algoritmos de recomendación,
+                y desarrollar lógica de personalización adaptativa.
+              </p>
+            </div>
+
+            <div class="step">
+              <h4>Integración y Testing</h4>
+              <p>
+                Incorporar los componentes inteligentes al sistema web, realizar
+                pruebas A/B, y optimizar el rendimiento.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ejercicios de Laboratorio -->
+        <div class="section">
+          <h2 class="section-title">
+            <div class="icon">🔬</div>
+            Ejercicios de Laboratorio - Resultados
+          </h2>
+
+          <div class="lab-result">
+            <h4>🎯 Sistema de Recomendación Personalizada</h4>
+            <p>
+              <strong>Resultado:</strong> Implementé un sistema que analiza el
+              historial de navegación y recomienda contenido con 85% de
+              precisión. Utilicé algoritmos de filtrado colaborativo y análisis
+              de similitud coseno.
+            </p>
+          </div>
+
+          <div class="lab-result">
+            <h4>🤖 Chatbot con Procesamiento de Lenguaje Natural</h4>
+            <p>
+              <strong>Resultado:</strong> Desarrollé un chatbot capaz de
+              responder consultas específicas del dominio con 92% de
+              satisfacción del usuario, integrando APIs de OpenAI y
+              entrenamiento personalizado.
+            </p>
+          </div>
+
+          <div class="lab-result">
+            <h4>📈 Dashboard de Analytics Predictivos</h4>
+            <p>
+              <strong>Resultado:</strong> Creé un dashboard que predice
+              tendencias de tráfico web con 78% de precisión usando modelos LSTM
+              y visualización en tiempo real con Chart.js.
+            </p>
+          </div>
+        </div>
+
+        <!-- Reflexión -->
+        <div class="section">
+          <h2 class="section-title">
+            <div class="icon">💭</div>
+            Reflexión Personal
+          </h2>
+
+          <div class="reflection-card">
+            <h3 class="pulse">🌟 ¿Qué aprendí?</h3>
+            <p>
+              Aprendí que los sistemas web inteligentes no solo se tratan de
+              implementar algoritmos complejos, sino de crear experiencias que
+              realmente agreguen valor al usuario. Descubrí la importancia del
+              equilibrio entre personalización y privacidad, y cómo la IA puede
+              hacer que las aplicaciones web sean más intuitivas y eficientes.
+              También comprendí que la ética en IA es fundamental al desarrollar
+              estos sistemas.
+            </p>
+          </div>
+
+          <div class="reflection-card">
+            <h3 class="pulse">🚀 ¿Cómo aprendí?</h3>
+            <p>
+              Mi aprendizaje fue principalmente
+              <span class="highlight">práctico y experimental</span>. Comencé
+              con proyectos pequeños implementando algoritmos básicos de ML en
+              JavaScript, luego escalé a sistemas más complejos. Utilicé
+              documentación técnica, tutoriales interactivos, y mucha
+              experimentación con diferentes APIs y frameworks. La práctica
+              constante de debugging y optimización de modelos fue clave para mi
+              comprensión profunda del tema.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Añadir interactividad sutil
+      document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll(".section");
+
+        sections.forEach((section) => {
+          section.addEventListener("mouseenter", function () {
+            this.style.background = "rgba(255, 255, 255, 0.1)";
+          });
+
+          section.addEventListener("mouseleave", function () {
+            this.style.background = "rgba(255, 255, 255, 0.05)";
+          });
+        });
+
+        // Efecto de aparición gradual
+        sections.forEach((section, index) => {
+          setTimeout(() => {
+            section.style.opacity = "0";
+            section.style.transform = "translateY(20px)";
+            section.style.transition = "all 0.6s ease";
+
+            setTimeout(() => {
+              section.style.opacity = "1";
+              section.style.transform = "translateY(0)";
+            }, 100);
+          }, index * 200);
+        });
+      });
+    </script>
+  </body>
+</html>
