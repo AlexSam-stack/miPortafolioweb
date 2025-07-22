@@ -1,0 +1,112 @@
+<div class="semana-contenido">
+  <h2>Semana 2: Desarrollo Web con HTML y CSS</h2>
+  <h3>Temas principales</h3>
+  <ul>
+    <li>HTML y XML: Estructura básica de páginas con HTML5 y XML</li>
+    <li>Etiquetas principales de HTML5</li>
+    <li>Concepto del Árbol DOM y su renderizado</li>
+    <li>Optimización SEO y compatibilidad entre navegadores</li>
+    <li>CSS3: Sintaxis y modelos de caja (block, inline, inline-block)</li>
+    <li>Unidades de medida (absolutas y relativas)</li>
+    <li>Diseño avanzado: Flexbox y CSS Grid Layout</li>
+    <li>Principios de diseño fluido y web responsivo</li>
+    <li>Productividad: Uso de Emmet para generar código HTML/CSS rápido</li>
+  </ul>
+
+  <h3>Ejercicio</h3>
+  <p>
+    Crea una página sencilla con estructura HTML5, aplica estilos con Flexbox y hazla responsiva usando CSS. Incluye ejemplos de código Emmet.
+  </p>
+
+  <h3>Código de ejemplo</h3>
+  <pre><code>
+&lt;!-- Estructura básica HTML5 --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Ejemplo Flexbox Responsive&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;style&gt;
+        body { font-family: Arial, sans-serif; margin: 0; }
+        header { background: #1976d2; color: #fff; padding: 16px; text-align: center; }
+        .contenedor {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 16px;
+        }
+        .caja {
+            background: #f8fafc;
+            border: 1px solid #1976d2;
+            border-radius: 8px;
+            flex: 1 1 200px;
+            min-width: 180px;
+            padding: 16px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            .contenedor { flex-direction: column; }
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;Ejemplo de Flexbox y Diseño Responsive&lt;/header&gt;
+    &lt;div class="contenedor"&gt;
+        &lt;div class="caja"&gt;Caja 1&lt;/div&gt;
+        &lt;div class="caja"&gt;Caja 2&lt;/div&gt;
+        &lt;div class="caja"&gt;Caja 3&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+  </code></pre>
+
+  <h3>Ejemplo de código Emmet</h3>
+  <pre><code>
+table&gt;tbody&gt;tr*20&gt;td{fila$@-}+td{dato}
+  </code></pre>
+  <p><b>Resultado:</b></p>
+  <table style="width:100%;border-collapse:collapse;margin-top:8px;">
+    <tbody>
+      <tr><td style="border:1px solid #1976d2;padding:4px;">fila20</td><td style="border:1px solid #1976d2;padding:4px;">dato</td></tr>
+      <tr><td style="border:1px solid #1976d2;padding:4px;">fila19</td><td style="border:1px solid #1976d2;padding:4px;">dato</td></tr>
+      <tr><td style="border:1px solid #1976d2;padding:4px;">fila18</td><td style="border:1px solid #1976d2;padding:4px;">dato</td></tr>
+      <!-- ... -->
+    </tbody>
+  </table>
+
+  <h3>Ejemplo de landing page generada con Emmet</h3>
+  <pre style="overflow-x:auto; background:#222; color:#fff; padding:10px; border-radius:6px;">
+<code style="word-break:break-all;">
+.container.mx-auto.p-8&gt;section.hero.text-center&gt;h1.text-4xl{Bienvenido a Mi Sitio}+p.text-lg{Tu solución digital empieza aquí}^section.servicios.grid.grid-cols-3.gap-4&gt;(div.servicio&gt;h3.text-xl{Servicio $}+p{Descripción del servicio $})*3+section.cta.bg-blue-500.text-white.p-6.text-center&gt;h2.text-2xl{¿Listo para empezar?}+button.boton{Contáctanos}
+</code>
+</pre>
+  <div style="background:#e3f2fd;padding:16px;border-radius:8px;margin-top:8px;">
+    <h1 style="font-size:2em;text-align:center;margin:0 0 8px 0;">Bienvenido a Mi Sitio</h1>
+    <p style="text-align:center;margin:0 0 16px 0;">Tu solución digital empieza aquí</p>
+    <div style="display:flex;gap:8px;justify-content:center;">
+      <div style="background:#fff;border-radius:6px;padding:10px 16px;">
+        <h3 style="margin:0 0 4px 0;">Servicio 1</h3>
+        <p style="margin:0;">Descripción del servicio 1</p>
+      </div>
+      <div style="background:#fff;border-radius:6px;padding:10px 16px;">
+        <h3 style="margin:0 0 4px 0;">Servicio 2</h3>
+        <p style="margin:0;">Descripción del servicio 2</p>
+      </div>
+      <div style="background:#fff;border-radius:6px;padding:10px 16px;">
+        <h3 style="margin:0 0 4px 0;">Servicio 3</h3>
+        <p style="margin:0;">Descripción del servicio 3</p>
+      </div>
+    </div>
+    <div style="background:#1976d2;color:#fff;padding:12px 0;margin-top:16px;border-radius:6px;text-align:center;">
+      <h2 style="margin:0 0 8px 0;">¿Listo para empezar?</h2>
+      <button style="background:#fff;color:#1976d2;border:none;padding:8px 18px;border-radius:4px;cursor:pointer;">Contáctanos</button>
+    </div>
+  </div>
+
+  <h3>Reflexión</h3>
+  <p>
+    Aprendí a estructurar páginas web modernas y responsivas usando HTML5 y CSS3, aplicando Flexbox, principios de diseño fluido y productividad con Emmet.
+  </p>
+</div>

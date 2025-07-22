@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semana 7: Introducción a la Gestión de Estado con Hooks</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: linear-gradient(135deg, #1a3c5e 0%, #0f1c2e 100%);
+        min-height: 100vh;
+        padding: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q25,75 50,50 T100,50 V100 H0 Z' fill='rgba(0, 0, 0, 0.2)'/%3E%3C/svg%3E");
+        background-size: 200px 100px;
+        background-position: bottom;
+        color: #ffffff;
+      }
+      .container {
+        max-width: 800px;
+        background: rgba(26, 60, 94, 0.9);
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 0 20px rgba(0, 191, 255, 0.5),
+          inset 0 0 10px rgba(0, 191, 255, 0.3);
+      }
+      h1 {
+        color: #00ffff;
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 2.2em;
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00bfff;
+      }
+      h2 {
+        color: #00ffff;
+        margin-top: 25px;
+        font-size: 1.8em;
+        text-shadow: 0 0 5px #00ffff, 0 0 10px #00bfff;
+        border-left: 4px solid #00ffff;
+        padding-left: 10px;
+      }
+      h3 {
+        color: #00ffff;
+        font-size: 1.4em;
+        margin: 20px 0 10px;
+        text-shadow: 0 0 5px #00ffff;
+      }
+      .section {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #00ffff;
+        border-radius: 5px;
+        box-shadow: 0 0 15px rgba(0, 191, 255, 0.3);
+      }
+      .topic-list {
+        list-style: none;
+        padding-left: 0;
+      }
+      .topic-list li {
+        padding: 10px;
+        border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        color: #e0f7fa;
+      }
+      .topic-list li strong {
+        color: #00ffff;
+      }
+      .code-example {
+        background: rgba(0, 44, 66, 0.8);
+        border: 1px solid #00bfff;
+        border-radius: 5px;
+        padding: 15px;
+        margin: 15px 0;
+        box-shadow: 0 0 10px rgba(0, 191, 255, 0.2);
+      }
+      .code-example pre {
+        margin: 0;
+        color: #ff4500;
+        font-family: "Courier New", monospace;
+      }
+      .demo-container {
+        background: rgba(15, 28, 46, 0.9);
+        padding: 20px;
+        border-radius: 5px;
+        border: 2px solid #00ffff;
+        box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
+        margin-top: 20px;
+      }
+      .counter-display {
+        font-size: 2.5em;
+        font-weight: bold;
+        text-align: center;
+        color: #00ffff;
+        margin: 20px 0;
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00bfff;
+      }
+      .todo-list {
+        margin-top: 20px;
+      }
+      .todo-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        background: rgba(0, 44, 66, 0.7);
+        border: 1px solid #00bfff;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        box-shadow: 0 0 8px rgba(0, 191, 255, 0.2);
+      }
+      .todo-item.completed {
+        opacity: 0.7;
+        text-decoration: line-through;
+        background: rgba(0, 66, 44, 0.7);
+      }
+      .status {
+        text-align: center;
+        padding: 10px;
+        background: rgba(0, 44, 66, 0.8);
+        border-radius: 5px;
+        margin-top: 10px;
+        color: #e0f7fa;
+        border: 1px solid #00bfff;
+        box-shadow: 0 0 10px rgba(0, 191, 255, 0.2);
+      }
+      .btn-primary {
+        background-color: #00ffff;
+        border-color: #00bfff;
+        color: #0f1c2e;
+        font-weight: bold;
+        text-shadow: 0 0 5px #ffffff;
+      }
+      .btn-primary:hover {
+        background-color: #00bfff;
+        border-color: #0099cc;
+        box-shadow: 0 0 15px #00ffff;
+      }
+      .practical-title {
+        color: #00ff00;
+        font-size: 1.8em;
+        text-align: center;
+        margin: 20px 0;
+        text-shadow: 0 0 15px #00ff00, 0 0 30px #00cc00, 0 0 40px #009900;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+        }
+        h1 {
+          font-size: 1.8em;
+        }
+        h2 {
+          font-size: 1.5em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Semana 7: Introducción a la Gestión de Estado con Hooks</h1>
+
+      <div class="section">
+        <h2>Temas Trabajados</h2>
+        <ul class="topic-list">
+          <li>
+            <strong>useState:</strong> Gestión de estado local para componentes
+            reactivos.
+          </li>
+          <li>
+            <strong>useEffect:</strong> Manejo de efectos secundarios como
+            actualizaciones del DOM.
+          </li>
+          <li>
+            <strong>Custom Hook:</strong> Creación de hooks reutilizables para
+            lógica encapsulada.
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Ejemplos de Código</h2>
+        <h3>useState y Custom Hook</h3>
+        <div class="code-example">
+          <pre>
+// useState - Manejo de estado local
+const [count, setCount] = useState(0);
+
+// Custom Hook - Contador
+function useCounter(initialValue = 0) {
+    const [count, setCount] = useState(initialValue);
+    const increment = () => setCount(c => c + 1);
+    const decrement = () => setCount(c => c - 1);
+    const reset = () => setCount(initialValue);
+    return { count, increment, decrement, reset };
+}
+                </pre
+          >
+        </div>
+        <h3>useEffect</h3>
+        <div class="code-example">
+          <pre>
+// useEffect - Actualizar título
+useEffect(() => {
+    document.title = `Contador: ${count}`;
+    return () => {
+        document.title = 'React App';
+    };
+}, [count]);
+                </pre
+          >
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="practical-title">Ejercicio Práctico:</h2>
+        <p>
+          Desarrollo de una aplicación sencilla que incluye un contador y una
+          lista de tareas usando hooks.
+        </p>
+        <div class="demo-container">
+          <h3>Contador</h3>
+          <div class="counter-display" id="counterDisplay">0</div>
+          <div class="d-flex gap-2 justify-content-center mb-3">
+            <button class="btn btn-primary" onclick="incrementCounter()">
+              Incrementar
+            </button>
+            <button class="btn btn-primary" onclick="decrementCounter()">
+              Decrementar
+            </button>
+            <button class="btn btn-primary" onclick="resetCounter()">
+              Reiniciar
+            </button>
+          </div>
+
+          <h3>Lista de Tareas</h3>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              id="todoInput"
+              class="form-control"
+              placeholder="Nueva tarea..."
+            />
+            <button class="btn btn-primary" onclick="addTodo()">Agregar</button>
+          </div>
+          <div class="todo-list" id="todoList"></div>
+          <div class="status" id="appStatus">Aplicación cargada</div>
+        </div>
+        <h3>Resultados Obtenidos</h3>
+        <ul class="topic-list">
+          <li>✅ Contador con useState y custom hook</li>
+          <li>✅ Lista de tareas con gestión de estado</li>
+          <li>✅ Efectos secundarios con useEffect</li>
+          <li>✅ Diseño responsivo con Bootstrap</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Reflexión</h2>
+        <h3>¿Qué aprendí?</h3>
+        <p>
+          Comprendí cómo useState y useEffect facilitan la gestión de estado y
+          efectos secundarios en aplicaciones web. Los hooks personalizados
+          permiten reutilizar lógica de manera eficiente.
+        </p>
+        <h3>¿Cómo aprendí?</h3>
+        <p>
+          Estudié la documentación de React Hooks y practiqué implementando un
+          contador y una lista de tareas.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Simulación de React Hooks
+      let appState = {
+        counter: 0,
+        todos: [],
+      };
+
+      // Simulación de useState
+      function useState(initialValue) {
+        let value = initialValue;
+        const setValue = (newValue) => {
+          value = typeof newValue === "function" ? newValue(value) : newValue;
+          updateUI();
+        };
+        return [value, setValue];
+      }
+
+      // Simulación de useEffect
+      let effects = [];
+      function useEffect(callback, dependencies) {
+        effects.push({ callback, dependencies, cleanup: null });
+        const cleanup = callback();
+        if (typeof cleanup === "function") {
+          effects[effects.length - 1].cleanup = cleanup;
+        }
+      }
+
+      // Custom Hook: useCounter
+      function useCounter(initialValue = 0) {
+        const increment = () => {
+          appState.counter++;
+          updateUI();
+        };
+        const decrement = () => {
+          appState.counter--;
+          updateUI();
+        };
+        const reset = () => {
+          appState.counter = initialValue;
+          updateUI();
+        };
+        return { count: appState.counter, increment, decrement, reset };
+      }
+
+      // Reducer para todos
+      function todoReducer(state, action) {
+        switch (action.type) {
+          case "ADD_TODO":
+            return [
+              ...state,
+              { id: Date.now(), text: action.payload, completed: false },
+            ];
+          case "TOGGLE_TODO":
+            return state.map((todo) =>
+              todo.id === action.payload
+                ? { ...todo, completed: !todo.completed }
+                : todo
+            );
+          default:
+            return state;
+        }
+      }
+
+      // Funciones del contador
+      const counter = useCounter(0);
+      function incrementCounter() {
+        counter.increment();
+        updateStatus("Contador incrementado");
+      }
+      function decrementCounter() {
+        counter.decrement();
+        updateStatus("Contador decrementado");
+      }
+      function resetCounter() {
+        counter.reset();
+        updateStatus("Contador reiniciado");
+      }
+
+      // Funciones de todos
+      function addTodo() {
+        const input = document.getElementById("todoInput");
+        const text = input.value.trim();
+        if (text) {
+          appState.todos = todoReducer(appState.todos, {
+            type: "ADD_TODO",
+            payload: text,
+          });
+          input.value = "";
+          updateTodoList();
+          updateStatus("Tarea agregada");
+        }
+      }
+
+      function toggleTodo(id) {
+        appState.todos = todoReducer(appState.todos, {
+          type: "TOGGLE_TODO",
+          payload: id,
+        });
+        updateTodoList();
+        updateStatus("Tarea actualizada");
+      }
+
+      // UI Updates
+      function updateUI() {
+        updateCounterDisplay();
+        updateTodoList();
+        updateEffect();
+      }
+
+      function updateCounterDisplay() {
+        document.getElementById("counterDisplay").textContent =
+          appState.counter;
+      }
+
+      function updateTodoList() {
+        const todoList = document.getElementById("todoList");
+        todoList.innerHTML = "";
+        if (appState.todos.length === 0) {
+          todoList.innerHTML =
+            '<p class="text-center text-muted">No hay tareas</p>';
+          return;
+        }
+        appState.todos.forEach((todo) => {
+          const todoItem = document.createElement("div");
+          todoItem.className = `todo-item ${todo.completed ? "completed" : ""}`;
+          todoItem.innerHTML = `
+                    <input type="checkbox" ${
+                      todo.completed ? "checked" : ""
+                    } onchange="toggleTodo(${todo.id})">
+                    <span>${todo.text}</span>
+                `;
+          todoList.appendChild(todoItem);
+        });
+      }
+
+      function updateStatus(message) {
+        const status = document.getElementById("appStatus");
+        status.textContent = message;
+        setTimeout(() => {
+          status.textContent = "Aplicación cargada";
+        }, 2000);
+      }
+
+      function updateEffect() {
+        effects.forEach((effect) => {
+          effect.callback();
+        });
+      }
+
+      // Inicialización
+      function init() {
+        useEffect(() => {
+          document.title = `Contador: ${appState.counter}`;
+          return () => {
+            document.title = "React App";
+          };
+        }, [appState.counter]);
+
+        appState.todos = [
+          { id: 1, text: "Aprender useState", completed: true },
+          { id: 2, text: "Explorar useEffect", completed: false },
+        ];
+        updateUI();
+        updateStatus("Aplicación inicializada");
+      }
+
+      window.addEventListener("load", init);
+      window.addEventListener("beforeunload", () => {
+        effects.forEach((effect) => {
+          if (effect.cleanup) effect.cleanup();
+        });
+      });
+    </script>
+  </body>
+</html>
