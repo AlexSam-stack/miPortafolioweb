@@ -7,7 +7,7 @@ function mostrarSemana(numero) {
   if (principal) principal.style.display = "none";
 
   const container = document.getElementById("paginas-semanas");
-  fetch(`../semanas/semana${numero}.html`)
+  fetch(`./semana${numero}.html`)
     .then((res) => res.text())
     .then((html) => {
       container.innerHTML = `
